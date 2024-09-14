@@ -16,6 +16,7 @@ export default function Search({placeholder}: { placeholder: string }) {
         console.log(`加$符号取值：${term}`)//这种字符串拼接方式比较友好
         console.log('加$符号取值：' + term)//普通的字符串拼接方式
         const params = new URLSearchParams(searchParams);
+        params.set('page','1');// 每次查询都从第一个开始查询
         if (term) {
             params.set('query', term);
         } else {

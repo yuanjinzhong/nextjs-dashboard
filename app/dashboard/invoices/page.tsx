@@ -12,6 +12,7 @@ export default async function Page({searchParams}: { searchParams?: { query?: st
     const query = searchParams?.query || '';
     const currentPage = Number(searchParams?.page) || 1;
     const totalPages = await fetchInvoicesPages(query);// 在服务端组建查询数据库，将得到的数据传给客户端组建：totalPages
+    console.log(`服务端显示invoice的totalPage等于:${totalPages}`)
     return (
         <div className="w-full">
             <div className="flex w-full items-center justify-between">
