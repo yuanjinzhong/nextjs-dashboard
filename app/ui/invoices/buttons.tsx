@@ -1,3 +1,4 @@
+import { deleteInvoice } from '@/app/lib/action';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
@@ -14,7 +15,7 @@ export function CreateInvoice() {
 }
 
 /**
- * 路由到编辑页面
+ * 路由到发票编辑页面
  * @param id
  * @constructor
  */
@@ -29,13 +30,24 @@ export function UpdateInvoice({ id }: { id: string }) {
   );
 }
 
+
+/**
+ * 删除的话,不需要路由的奥具体的页面,所以在当前按钮实现删除就行
+ * @param param0 
+ * @returns 
+ */
+
 export function DeleteInvoice({ id }: { id: string }) {
+
+  const deleteInvoiceWithId = deleteInvoice.bind(null, id);
+
+  // <form action={deleteInvoiceWithId}>    叫做 server action , 不过在spring boot 作为后端接口时,基本没啥用
   return (
-    <>
+    <form action={deleteInvoiceWithId}>
       <button className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-5" />
       </button>
-    </>
+    </form>
   );
 }
