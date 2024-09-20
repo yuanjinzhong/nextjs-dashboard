@@ -4,8 +4,8 @@ import {z} from "zod";
 import {sql} from "@vercel/postgres";
 import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
-import { signIn } from '@/auth';
-import { AuthError } from 'next-auth';
+import {signIn} from '@/auth';
+import {AuthError} from 'next-auth';
 
 
 /**
@@ -38,6 +38,13 @@ export async function createInvoice(prevState: State, formData: FormData) {
 
 
     console.log('createInvoice这个server action 接受的参数->prevState:' + JSON.stringify(prevState))
+
+    const formDataObject: { [key: string]: string } = {};
+    // 遍历 FormData 并将其转换为普通对象
+    for (const [key, value] of formData.entries()) {
+        formDataObject[key] = value as string;
+    }
+    console.log("创建发票数据", formDataObject);
 
 
     // const { customerId, amount, status } = CreateInvoice.parse({
@@ -90,6 +97,14 @@ export async function createInvoice(prevState: State, formData: FormData) {
  * 更新发票
  */
 export async function updateInvoice(id: string, preState: State, formData: FormData) {
+
+    const formDataObject: { [key: string]: string } = {};
+    // 遍历 FormData 并将其转换为普通对象
+    for (const [key, value] of formData.entries()) {
+        formDataObject[key] = value as string;
+    }
+    console.log("更新发票数据", formDataObject);
+
 
     // 类型转换,参数校验
     // const { customerId, amount, status } = UpdateInvoice.parse({
@@ -171,23 +186,35 @@ export type State = {
 };
 
 
+/**
+ * 登录认证
+ * @param prevState
+ * @param formData
+ */
 export async function authenticate(
     prevState: string | undefined,
     formData: FormData,
-  ) {
+) {
     try {
-        console.log("服务端认证数据"+JSON.stringify(formData));
-      await signIn('credentials', formData);
-    } catch (error) {
-      if (error instanceof AuthError) {
-        switch (error.type) {
-          case 'CredentialsSignin':
-            return 'Invalid credentials.';
-          default:
-            return 'Something went wrong.';
+        const formDataObject: { [key: string]: string } = {};
+        // 遍历 FormData 并将其转换为普通对象
+        for (const [key, value] of formData.entries()) {
+            formDataObject[key] = value as string;
         }
-      }
-      throw error;
+        console.log("服务端认证数据", formDataObject);
+
+        await signIn('credentials', formData);
+
+    } catch (error) {
+        if (error instanceof AuthError) {
+            switch (error.type) {
+                case 'CredentialsSignin':
+                    return 'Invalid credentials.';
+                default:
+                    return 'Something went wrong.';
+            }
+        }
+        throw error;
     }
-  }
+}
 
