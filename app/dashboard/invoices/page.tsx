@@ -6,6 +6,14 @@ import {lusitana} from '@/app/ui/fonts';
 import {InvoicesTableSkeleton} from '@/app/ui/skeletons';
 import {Suspense} from 'react';
 import {fetchInvoicesPages} from "@/app/lib/data";
+import { Metadata } from 'next';
+
+/**
+ * 给网页添加元数据
+ */
+export const metadata: Metadata = {
+    title: 'Invoices | Acme Dashboard',
+};
 
 // 每个app目录下的路由组建（page组建）都是缺省有一个searchParams参数的，表示当前的路由参数，官方文档：https://nextjs.org/docs/app/api-reference/file-conventions/page
 export default async function Page({searchParams}: { searchParams?: { query?: string, page?: string } }) {
