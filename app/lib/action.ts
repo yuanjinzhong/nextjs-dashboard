@@ -4,6 +4,9 @@ import {z} from "zod";
 import {sql} from "@vercel/postgres";
 import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
+
 
 /**
  * 类型转换,服务端参数校验
@@ -166,3 +169,25 @@ export type State = {
     };
     message?: string | null;
 };
+
+
+export async function authenticate(
+    prevState: string | undefined,
+    formData: FormData,
+  ) {
+    try {
+        console.log("服务端认证数据"+JSON.stringify(formData));
+      await signIn('credentials', formData);
+    } catch (error) {
+      if (error instanceof AuthError) {
+        switch (error.type) {
+          case 'CredentialsSignin':
+            return 'Invalid credentials.';
+          default:
+            return 'Something went wrong.';
+        }
+      }
+      throw error;
+    }
+  }
+
