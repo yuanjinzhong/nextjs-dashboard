@@ -44,7 +44,7 @@ export default function Pagination({totalPages}: { totalPages: number }) {
                 {/*分页按钮的页码*/}
                 <div className="flex -space-x-px">
                     {allPages.map((page, index) => {
-                        let position: 'first' | 'last' | 'single' | 'middle' ;
+                        let position: 'first' | 'last' | 'single' | 'middle'= 'middle' ;
 
                         if (index === 0) position = 'first';
                         if (index === allPages.length - 1) position = 'last';
