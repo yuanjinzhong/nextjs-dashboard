@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@tailwind base;  /* 告诉tailwind css 引入基础样式 */
+@tailwind components;  /* 告诉tailwind css 引入组件样式 */
+@tailwind utilities;  /* 告诉tailwind css 引入工具类样式 */
 
 input[type='number'] {
   -moz-appearance: textfield;
