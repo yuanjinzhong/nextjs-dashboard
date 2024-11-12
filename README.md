@@ -1,6 +1,6 @@
 # 项目预览地址
 
-- nextjs-yjz.vercel.app
+- https://nextjs-yjz2.vercel.app
 - email: 'user@nextmail.com'
 - password: '123456'
 
