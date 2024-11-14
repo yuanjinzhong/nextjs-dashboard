@@ -5,7 +5,7 @@ import { invoices, customers, revenue, users } from "../lib/placeholder-data";
 /**
  *  这个就是route handlers （老版本里面叫api 路由） ，等于spring Boot中的 controller ,提供了一个http接口， 个人觉得只有在全栈项目中才有用， 前后端分离的项目没啥用， 因为http接口通常是spring boot 提供
  *
- *  该http接口路径：http://localhost:3000/app/seed/ 且访问的是这个函数：export async function GET() 。。。
+ *  该http接口路径：http://localhost:3000/seed/ （注意不需要'/app'） 且访问的是这个函数：export async function GET() 。。。
  */
 
 const client = await db.connect();
