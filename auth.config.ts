@@ -1,5 +1,10 @@
 import type { NextAuthConfig } from "next-auth";
 
+
+/**
+ * 导出一个auth的配置类，在其他地方引用
+ */
+
 export const authConfig = {
   pages: {
     signIn: "/login", // 指定登录页面，当用户没有登录时，重定向到这个页面

@@ -6,6 +6,11 @@ import { sql } from "@vercel/postgres";
 import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
 
+/**
+ *  导出一个解构导出一个定制化的NextAuth对象，在其他地方引用，结构出来的函数在具体的功能页面发挥作用，
+ *  eg： signIn 函数在登陆页面、signOut 函数在推出页面
+ */
+
 //{...authConfig} 在 TypeScript 或 JavaScript 中，{ ...authConfig }
 //使用了 对象展开语法（spread syntax），它的作用是将一个对象的属性展开（复制）到另一个对象中
 export const { auth, signIn, signOut } = NextAuth({

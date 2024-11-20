@@ -203,7 +203,7 @@ export async function authenticate(
         }
         console.log("服务端认证数据", formDataObject);
 
-        await signIn('credentials', formData);
+        await signIn('credentials', formData);//credentials 表示账号密码认证，nextAuth.js预先定义的枚举
 
     } catch (error) {
         if (error instanceof AuthError) {
