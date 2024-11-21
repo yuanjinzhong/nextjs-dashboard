@@ -14,6 +14,8 @@ import { authenticate } from '@/app/lib/action';
 export default function LoginForm() {
 
   //使用 useActionState 钩子 包装 `react server action`
+
+  // 下面表单的被提交的时候，会执行authenticate方法，errorMessage是errorMessage方法的返回值
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined,
