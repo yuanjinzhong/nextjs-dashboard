@@ -31,7 +31,8 @@ export const { auth, signIn, signOut } = NextAuth({
 
           if (passwordsMatch) return user;
         }
-        console.log('Invalid credentials');
+        console.log("Invalid credentials");
+        //返回null的话错误信息会抛出到页面，所以调用登陆的地方需要try catch 处理错误信息
         return null;
       },
     }),
