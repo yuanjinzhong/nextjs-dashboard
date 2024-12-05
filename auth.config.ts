@@ -16,7 +16,7 @@ export const authConfig = {
       //第二个 ! 再次取反，这样结果就会是原始布尔值
       //?.（可选链操作符）：这是一个用来安全地访问对象的嵌套属性的操作符。它的作用是，如果对象或属性为 null 或 undefined，则返回 undefined，而不会导致错误。这样可以避免访问不存在的属性时抛出异常。
       const isLoggedIn = !!auth?.user;  // 判断用户是否已登录
-      const isOnDashboard = nextUrl.pathname.startsWith("/dashboard");  // 检查用户是否在访问 "/dashboard" 路由
+      const isOnDashboard = nextUrl.pathname.startsWith("/dashboard");  // 检查用户是否在访问 "/dashboard" 路由，避免无脑重定向
       if (isOnDashboard) {
         if (isLoggedIn) return true;    // 如果已登录并访问 Dashboard，则允许访问
         return false; // Redirect unauthenticated users to login page ，如果未登录，则禁止访问 Dashboard，通常会重定向到登录页面
