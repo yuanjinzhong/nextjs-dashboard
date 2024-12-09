@@ -82,3 +82,7 @@ const invalidUser: User = {
 
 console.log("Valid user:", validUser);
 console.log("Invalid user:", invalidUser); // 这行代码会导致编译报错
+
+// 问gpt // 使用 z.infer 推断类型
+// type Product = z.infer<typeof productSchema>;
+// 那这行的作用是啥
