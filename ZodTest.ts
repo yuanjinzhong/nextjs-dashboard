@@ -1,5 +1,4 @@
-import { z } from "zod";
-import {SafeParseReturnType} from "zod/lib/types";
+import {z} from "zod";
 
 // 定义模式
 const userSchema = z.object({
@@ -35,15 +34,15 @@ const testInvalidData = () => {
 };
 
 const testInvalidDataSafe = () => {
-   const userData={
-       name: "Bob",
-       age: -5,
-       email: "not_an_email",
-   }
-   const safeParse:SafeParseReturnType = userSchema.safeParse(userData);
-   if (!safeParse.success){
-       console.log("验证失败-安全的：",safeParse.error.issues)
-   }
+    const userData = {
+        name: "Bob",
+        age: -5,
+        email: "not_an_email",
+    }
+    const safeParse = userSchema.safeParse(userData);
+    if (!safeParse.success) {
+        console.log("验证失败-安全的：", safeParse.error.issues)
+    }
 
 };
 
@@ -51,8 +50,6 @@ const testInvalidDataSafe = () => {
 testValidData();
 testInvalidData();
 testInvalidDataSafe()
-
-
 
 
 // 定义 Zod 模式
@@ -63,7 +60,7 @@ const userSchema2 = z.object({
     isActive: z.boolean().optional(), // 可选字段
 });
 
-// 使用 z.infer 推断类型
+// z.infer 的主要作用是静态推断类型，在`编译阶段`防止类型错误。
 type User = z.infer<typeof userSchema2>;
 
 // 示例：在 TypeScript 中验证类型
@@ -77,9 +74,11 @@ const validUser: User = {
 const invalidUser: User = {
     name: "Bob",
     age: 25,
-    email: "bob@example", // 错误：无效邮箱格式
+    email: "bob@@@", // 错误：无效邮箱格式
 };
 
+const result = userSchema2.safeParse(invalidUser);
+console.log(result.error?.issues);
 console.log("Valid user:", validUser);
 console.log("Invalid user:", invalidUser); // 这行代码会导致编译报错
 
