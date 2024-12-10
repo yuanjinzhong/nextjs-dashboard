@@ -1,6 +1,6 @@
 import {z} from "zod";
 
-// 定义模式
+// 定义模式Schema
 const userSchema = z.object({
     name: z.string(),
     age: z.number().int().positive(),
@@ -15,6 +15,7 @@ const testValidData = () => {
         email: "alice@example.com",
     };
 
+    // 用schema验证对象
     const result = userSchema.parse(userData); // 验证通过时返回数据
     console.log("验证成功：", result);
 };
@@ -39,6 +40,7 @@ const testInvalidDataSafe = () => {
         age: -5,
         email: "not_an_email",
     }
+    // 用schema安全的验证。不会抛出zodError
     const safeParse = userSchema.safeParse(userData);
     if (!safeParse.success) {
         console.log("验证失败-安全的：", safeParse.error.issues)
